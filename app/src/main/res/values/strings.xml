@@ -336,5 +336,10 @@ We inform you that the application commission (20%) is calculated on a single tr
     <string name="pay">Pay</string>
     <string name="order_delete">Client Delete Order</string>
     <string name="you_cant">Your Balance is Payed Before  </string>
+    <string name="user_bloked">User blocked from admin</string>
+    <string name="user_dele">User deleted from admin</string>
+    <string name="user_name">User Name</string>
+    <string name="password_short">Password Short</string>
+    <string name="client">Client</string>
 
 </resources>

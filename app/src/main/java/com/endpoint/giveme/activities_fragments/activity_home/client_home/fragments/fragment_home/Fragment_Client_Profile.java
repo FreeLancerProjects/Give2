@@ -313,6 +313,7 @@ cons_pay.setOnClickListener(new View.OnClickListener() {
                 cons_balance.setVisibility(View.GONE);
 //                ll_certification.setVisibility(View.GONE);
                 cons_pay.setVisibility(View.GONE);
+                cons_register_delegate.setVisibility(View.GONE);
             } else {
                 cons_register_delegate.setVisibility(View.GONE);
 

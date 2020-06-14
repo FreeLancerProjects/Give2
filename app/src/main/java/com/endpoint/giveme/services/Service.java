@@ -88,21 +88,24 @@ public interface Service {
                                       @Query(value = "language") String language,
                                       @Query(value = "key") String key);
 
+
     @FormUrlEncoded
-    @POST("/api/signup")
+    @POST("/Api/signup")
     Call<UserModel> signUpWithoutImage(@Field("user_email") String user_email,
                                        @Field("user_phone") String user_phone,
                                        @Field("user_phone_code") String user_phone_code,
                                        @Field("user_full_name") String user_full_name,
                                        @Field("user_gender") String user_gender,
                                        @Field("user_country") String user_country,
-                                       @Field("user_age") long user_age
+                                       @Field("user_age") long user_age,
+                                       @Field("user_name") String user_name,
+                                       @Field("user_pass") String user_pass
 
     );
 
 
     @Multipart
-    @POST("/api/signup")
+    @POST("/Api/signup")
     Call<UserModel> signUpWithImage(@Part("user_email") RequestBody user_email,
                                     @Part("user_phone") RequestBody user_phone,
                                     @Part("user_phone_code") RequestBody user_phone_code,
@@ -110,7 +113,49 @@ public interface Service {
                                     @Part("user_gender") RequestBody user_gender,
                                     @Part("user_country") RequestBody user_country,
                                     @Part("user_age") RequestBody user_age,
+                                    @Part("user_name") RequestBody user_name,
+                                    @Part("user_pass") RequestBody user_pass,
                                     @Part MultipartBody.Part image
+    );
+
+
+    @Multipart
+    @POST("/Api/driverSignup")
+    Call<UserModel> signUpDelegateWithoutImage(@Part("user_email") RequestBody user_email,
+                                               @Part("user_phone") RequestBody user_phone,
+                                               @Part("user_phone_code") RequestBody user_phone_code,
+                                               @Part("user_full_name") RequestBody user_full_name,
+                                               @Part("user_gender") RequestBody user_gender,
+                                               @Part("user_country") RequestBody user_country,
+                                               @Part("user_age") RequestBody user_age,
+                                               @Part("user_card_id") RequestBody user_card_id,
+                                               @Part("user_address") RequestBody user_address,
+                                               @Part("user_name") RequestBody user_name,
+                                               @Part("user_pass") RequestBody user_pass,
+                                               @Part MultipartBody.Part user_card_id_image,
+                                               @Part MultipartBody.Part user_driving_license,
+                                               @Part MultipartBody.Part image_car_front,
+                                               @Part MultipartBody.Part image_car_back
+    );
+
+    @Multipart
+    @POST("/Api/driverSignup")
+    Call<UserModel> signUpDelegateWithImage(@Part("user_email") RequestBody user_email,
+                                            @Part("user_phone") RequestBody user_phone,
+                                            @Part("user_phone_code") RequestBody user_phone_code,
+                                            @Part("user_full_name") RequestBody user_full_name,
+                                            @Part("user_gender") RequestBody user_gender,
+                                            @Part("user_country") RequestBody user_country,
+                                            @Part("user_age") RequestBody user_age,
+                                            @Part("user_card_id") RequestBody user_card_id,
+                                            @Part("user_address") RequestBody user_address,
+                                            @Part("user_name") RequestBody user_name,
+                                            @Part("user_pass") RequestBody user_pass,
+                                            @Part MultipartBody.Part user_card_id_image,
+                                            @Part MultipartBody.Part user_driving_license,
+                                            @Part MultipartBody.Part image_car_front,
+                                            @Part MultipartBody.Part image_car_back,
+                                            @Part MultipartBody.Part image
     );
 
 
@@ -465,6 +510,17 @@ public interface Service {
             @Field("order_id") String order_id,
             @Field("bill_amount") String bill_amount
     );
+    @FormUrlEncoded
+    @POST("/Api/logMe")
+    Call<UserModel> checkfound(@Field("user_phone_code") String user_phone_code,
+                               @Field("user_phone") String user_phone
+    );
+    @FormUrlEncoded
+    @POST("/Api/newLogin")
+    Call<UserModel> login(@Field("user_name") String user_name,
+                          @Field("user_pass") String user_pass
+    );
+
 }
 
 

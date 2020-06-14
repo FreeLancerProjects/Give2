@@ -4,21 +4,19 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.endpoint.giveme.R;
 import com.endpoint.giveme.activities_fragments.activity_sign_in.activity.SignInActivity;
 import com.endpoint.giveme.remote.Api;
@@ -46,7 +44,7 @@ public class Fragment_Code_Verification extends Fragment {
     private static String TAG2 = "phone_number";
     private static String TAG3 = "country_code";
 
-    private PinEntryEditText edt_code;
+    private EditText edt_code;
     private Button btn_resend, btn_confirm;
     private SignInActivity activity;
     private String phone_code = "", phone_number = "", country_code = "";
@@ -96,7 +94,6 @@ public class Fragment_Code_Verification extends Fragment {
                 if (canResend) {
                     // sendSMSCode(phone_code,phone_number);
                     sendverficationcode(phone_number, phone_code.replace("00", "+"));
-                    startCounter();
                 }
             }
         });
@@ -140,7 +137,6 @@ public class Fragment_Code_Verification extends Fragment {
                 if (phoneAuthCredential.getSmsCode() != null) {
                     code = phoneAuthCredential.getSmsCode();
                     edt_code.setText(code);
-                    edt_code.setPinBackground(activity.getResources().getDrawable(R.drawable.edit_shape2));
                     siginwithcredental(phoneAuthCredential);
                 } else {
                     siginwithcredental(phoneAuthCredential);
@@ -156,25 +152,6 @@ public class Fragment_Code_Verification extends Fragment {
 
 
         };
-        edt_code.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                edt_code.setPinBackground(activity.getResources().getDrawable(R.drawable.edit_shape));
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                edt_code.setPinBackground(activity.getResources().getDrawable(R.drawable.edit_shape));
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                edt_code.setPinBackground(activity.getResources().getDrawable(R.drawable.edit_shape));
-
-            }
-        });
 
     }
 
@@ -232,13 +209,8 @@ public class Fragment_Code_Verification extends Fragment {
         Log.e("ccc", code);
         if (id != null) {
 
-try {
-    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id, code);
-    siginwithcredental(credential);
-
-}catch (Exception e){
-
-}
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(id, code);
+            siginwithcredental(credential);
         }
     }
 
@@ -250,16 +222,9 @@ try {
 
                 if (task.isSuccessful()) {
                     //  Log.e("data",phone);
-                    phone_code = phone_code.replace("+","00");
                     mAuth.signOut();
                     //activity.NavigateToClientHomeActivity();
-                   // ValidateCode("1234");
-                    activity.signIn(phone_number, country_code, phone_code);
-
-                }
-                else {
-                    Log.e("llllll",";llllll");
-
+                    ValidateCode("1234");
                 }
 
 
@@ -346,6 +311,3 @@ try {
         }
     }
 }
-
-
-

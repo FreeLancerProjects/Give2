@@ -43,7 +43,7 @@ public class Fragment_Delegate_Register extends Fragment {
     private ImageView image_id, image_id_icon, image_license, image_license_icon, arrow, image_register, car_front_image, car_front_icon, car_back_image, car_back_icon;
     private LinearLayout ll_back;
     private FrameLayout fl_id_image, fl_license_image, fl_car_front_image, fl_car_back_image;
-    private EditText edt_national_num, edt_address, edt_banknumber;
+    private EditText edt_national_num, edt_address;
     private ClientHomeActivity activity;
     private String current_language;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -89,7 +89,7 @@ public class Fragment_Delegate_Register extends Fragment {
         ll_back = view.findViewById(R.id.ll_back);
         edt_national_num = view.findViewById(R.id.edt_national_num);
         edt_address = view.findViewById(R.id.edt_address);
-        edt_banknumber = view.findViewById(R.id.edt_banknumber);
+     //   edt_banknumber = view.findViewById(R.id.edt_banknumber);
         fl_id_image = view.findViewById(R.id.fl_id_image);
         fl_license_image = view.findViewById(R.id.fl_license_image);
 
@@ -149,10 +149,10 @@ public class Fragment_Delegate_Register extends Fragment {
     private void CheckData() {
         String m_national_id = edt_national_num.getText().toString().trim();
         String m_address = edt_address.getText().toString().trim();
-String m_banknumber=edt_banknumber.getText().toString().trim();
+//String m_banknumber=edt_banknumber.getText().toString().trim();
         if (!TextUtils.isEmpty(m_national_id) &&
                 !TextUtils.isEmpty(m_address) &&
-                !TextUtils.isEmpty(m_banknumber)&&
+               // !TextUtils.isEmpty(m_banknumber)&&
                 imgUri1 != null &&
                 imgUri2 != null &&
                 imgUri3 != null &&
@@ -161,9 +161,9 @@ String m_banknumber=edt_banknumber.getText().toString().trim();
         ) {
             edt_address.setError(null);
             edt_national_num.setError(null);
-            edt_banknumber.setError(null);
+           // edt_banknumber.setError(null);
             Common.CloseKeyBoard(activity, edt_national_num);
-            activity.registerDelegate(m_national_id, m_address,m_banknumber, imgUri1, imgUri2, imgUri3, imgUri4);
+            activity.registerDelegate(m_national_id, m_address, imgUri1, imgUri2, imgUri3, imgUri4);
 
         } else {
             if (TextUtils.isEmpty(m_national_id)) {
@@ -173,13 +173,13 @@ String m_banknumber=edt_banknumber.getText().toString().trim();
                 edt_national_num.setError(null);
 
             }
-            if (TextUtils.isEmpty(m_banknumber)) {
-                edt_banknumber.setError(getString(R.string.field_req));
-
-            } else {
-                edt_banknumber.setError(null);
-
-            }
+//            if (TextUtils.isEmpty(m_banknumber)) {
+//                edt_banknumber.setError(getString(R.string.field_req));
+//
+//            } else {
+//                edt_banknumber.setError(null);
+//
+//            }
             if (TextUtils.isEmpty(m_address)) {
                 edt_address.setError(getString(R.string.field_req));
 

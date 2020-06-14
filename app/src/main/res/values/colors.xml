@@ -32,7 +32,8 @@
     <color name="screen1">#F44336</color>
     <color name="screen2">#64DD17</color>
     <color name="screen3">#9C27B0</color>
-
+    <color name="blue0">#21496e</color>
+    <color name="blue1">#00285d</color>
     <array name="dot_on_page_active">
         <item>#B71C1C</item>
         <item>#8BC34A</item>

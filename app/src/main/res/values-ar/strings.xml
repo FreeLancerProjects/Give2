@@ -333,5 +333,10 @@
     <string name="pay">دفع</string>
     <string name="order_delete">العميل حذف الطلب</string>
     <string name="you_cant">تم سداد رصيدك من قبل </string>
+    <string name="user_bloked">تم حظر المستخدم من الادارة</string>
+    <string name="user_dele">تم حذف المستخدم من الادارة</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="password_short">كلمة المرور قصيره</string>
+    <string name="client">عميل</string>
 
 </resources>

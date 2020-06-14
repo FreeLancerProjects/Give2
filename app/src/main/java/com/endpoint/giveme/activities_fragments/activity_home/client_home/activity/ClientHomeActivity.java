@@ -1723,13 +1723,12 @@ fragment_client_orders.getOrders();                             }
                 }, 1000);
     }
 
-    public void registerDelegate(String national_id, String address, String m_banknumber, Uri image_national_id, Uri image_license, Uri image_front_uri, Uri image_behind_uri) {
+    public void registerDelegate(String national_id, String address, Uri image_national_id, Uri image_license, Uri image_front_uri, Uri image_behind_uri) {
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.show();
         RequestBody user_id_part = Common.getRequestBodyText(userModel.getData().getUser_id());
         RequestBody national_id_part = Common.getRequestBodyText(national_id);
         RequestBody address_part = Common.getRequestBodyText(address);
-        RequestBody bank_part = Common.getRequestBodyText(m_banknumber);
 
         MultipartBody.Part image_national_id_part = Common.getMultiPart(this, image_national_id, "user_card_id_image");
         MultipartBody.Part image_license_part = Common.getMultiPart(this, image_license, "user_driving_license");
@@ -1738,55 +1737,55 @@ fragment_client_orders.getOrders();                             }
         MultipartBody.Part image_back_part = Common.getMultiPart(this, image_license, "image_car_back");
 
 
-        Api.getService(Tags.base_url)
-                .registerDelegate(user_id_part, national_id_part, address_part,bank_part, image_national_id_part, image_license_part, image_front_part, image_back_part)
-                .enqueue(new Callback<UserModel>() {
-                    @Override
-                    public void onResponse(Call<UserModel> call, final Response<UserModel> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
-                                        fragment_client_profile.updateUserData(response.body());
-                                        ClientHomeActivity.this.userModel = response.body();
-                                        userSingleTone.setUserModel(response.body());
-                                        ClientHomeActivity.super.onBackPressed();
-                                        fragment_count -= 1;
-                                        new Handler()
-                                                .postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        Common.CreateSuccessDialog(ClientHomeActivity.this, getString(R.string.succ_be_courier));
-
-                                                    }
-                                                }, 1000);
-                                    }
-                                }
-                            }, 1);
-                        } else if (response.code() == 406) {
-                            Toast.makeText(ClientHomeActivity.this, getString(R.string.req_sent), Toast.LENGTH_LONG).show();
-                        } else {
-                            try {
-                                Log.e("Error_code", response.code() + "" + response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(ClientHomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UserModel> call, Throwable t) {
-                        try {
-                            dialog.dismiss();
-                            Toast.makeText(ClientHomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
-                            Log.e("Error", t.getMessage());
-                        } catch (Exception e) {
-                        }
-                    }
-                });
+//        Api.getService(Tags.base_url)
+//                .signUpDelegateWithImage(user_id_part, national_id_part, address_part, image_national_id_part, image_license_part, image_front_part, image_back_part)
+//                .enqueue(new Callback<UserModel>() {
+//                    @Override
+//                    public void onResponse(Call<UserModel> call, final Response<UserModel> response) {
+//                        dialog.dismiss();
+//                        if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
+//                                        fragment_client_profile.updateUserData(response.body());
+//                                        ClientHomeActivity.this.userModel = response.body();
+//                                        userSingleTone.setUserModel(response.body());
+//                                        ClientHomeActivity.super.onBackPressed();
+//                                        fragment_count -= 1;
+//                                        new Handler()
+//                                                .postDelayed(new Runnable() {
+//                                                    @Override
+//                                                    public void run() {
+//                                                        Common.CreateSuccessDialog(ClientHomeActivity.this, getString(R.string.succ_be_courier));
+//
+//                                                    }
+//                                                }, 1000);
+//                                    }
+//                                }
+//                            }, 1);
+//                        } else if (response.code() == 406) {
+//                            Toast.makeText(ClientHomeActivity.this, getString(R.string.req_sent), Toast.LENGTH_LONG).show();
+//                        } else {
+//                            try {
+//                                Log.e("Error_code", response.code() + "" + response.errorBody().string());
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                            Toast.makeText(ClientHomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<UserModel> call, Throwable t) {
+//                        try {
+//                            dialog.dismiss();
+//                            Toast.makeText(ClientHomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+//                            Log.e("Error", t.getMessage());
+//                        } catch (Exception e) {
+//                        }
+//                    }
+//                });
 
 
     }

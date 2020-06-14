@@ -2,7 +2,7 @@ package com.endpoint.giveme.activities_fragments.activity_sign_in.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,14 +18,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.endpoint.giveme.R;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.activity.ClientHomeActivity;
 import com.endpoint.giveme.activities_fragments.activity_sign_in.activity.SignInActivity;
+import com.endpoint.giveme.models.UserModel;
 import com.endpoint.giveme.remote.Api;
 import com.endpoint.giveme.share.Common;
 import com.endpoint.giveme.tags.Tags;
@@ -48,16 +46,18 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
     private static final String TAG = "TYPE";
     private ImageView arrow;
     private LinearLayout ll_country;
-    private TextView tv_country,tv_code,tv_note;
-    private EditText edt_phone;
+    private TextView tv_country,tv_code,tv_note,tv_skip;
+    //edt_phone
+    private EditText edtname,edtpass;
     private FloatingActionButton fab;
     private FragmentActivity activity;
     private CountryPicker picker;
     private String current_language="";
     private String code = "";
-    private String country_code="";
+    private String country_code="sa";
     // from where , access from fragment chooser , fragment edit profile
     private String type;
+    private TextView tv_new;
 
 
     @Nullable
@@ -97,37 +97,53 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
         Paper.init(activity);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         arrow = view.findViewById(R.id.arrow);
-        ll_country = view.findViewById(R.id.ll_country);
-        tv_country = view.findViewById(R.id.tv_country);
-        tv_code = view.findViewById(R.id.tv_code);
+//        ll_country = view.findViewById(R.id.ll_country);
+//        tv_country = view.findViewById(R.id.tv_country);
+//        tv_code = view.findViewById(R.id.tv_code);
         tv_note = view.findViewById(R.id.tv_note);
 
-        edt_phone = view.findViewById(R.id.edt_phone);
+    //    edt_phone = view.findViewById(R.id.edt_phone);
+        edtname=view.findViewById(R.id.edtName);
+        edtpass=view.findViewById(R.id.edtPassword);
         fab = view.findViewById(R.id.fab);
+tv_new=view.findViewById(R.id.tv_new);
+        tv_skip=view.findViewById(R.id.tv_skip);
 
+        tv_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavigateToClientHomeActivity();
+            }
+        });
+tv_new.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        ((SignInActivity)activity).DisplayFragmentUserType();
+    }
+});
 
         if (current_language.equals("ar"))
         {
-            arrow.setImageResource(R.drawable.ic_right_arrow);
-            arrow.setColorFilter(ContextCompat.getColor(activity,R.color.white), PorterDuff.Mode.SRC_IN);
+//            arrow.setImageResource(R.drawable.ic_right_arrow);
+  //          arrow.setColorFilter(ContextCompat.getColor(activity,R.color.white), PorterDuff.Mode.SRC_IN);
         }else
             {
-                arrow.setImageResource(R.drawable.ic_left_arrow);
-                arrow.setColorFilter(ContextCompat.getColor(activity,R.color.white), PorterDuff.Mode.SRC_IN);
+    //            arrow.setImageResource(R.drawable.ic_left_arrow);
+      //          arrow.setColorFilter(ContextCompat.getColor(activity,R.color.white), PorterDuff.Mode.SRC_IN);
 
             }
         tv_note.setText(getString(R.string.never_share_phone_number)+"\n"+getString(R.string.your_privacy_guaranteed));
 
         CreateCountryDialog();
 
-        ll_country.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                picker.showDialog(activity);
-            }
-
-
-        });
+//        ll_country.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                picker.showDialog(activity);
+//            }
+//
+//
+//        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,44 +155,152 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
 
     }
 
+    public void NavigateToClientHomeActivity()
+    {
+        Intent intent = new Intent(activity, ClientHomeActivity.class);
+        startActivity(intent);
+        activity.finish();
 
+
+
+    }
     private void CheckData() {
         String phone_regex = "^[+]?[0-9]{6,}$";
 
-        String phone = edt_phone.getText().toString().trim();
+        String name = edtname.getText().toString().trim();
+String pass=edtpass.getText().toString().trim();
+//        if (phone.startsWith("0"))
+//        {
+//            phone = phone.replaceFirst("0","");
+//        }
 
-        if (phone.startsWith("0"))
-        {
-            phone = phone.replaceFirst("0","");
-        }
-
-        if (!TextUtils.isEmpty(phone) && phone.matches(phone_regex)) {
-            edt_phone.setError(null);
-            Common.CloseKeyBoard(activity, edt_phone);
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass) &&pass.length()>=6) {
+            edtname.setError(null);
+            edtpass.setError(null);
+            Common.CloseKeyBoard(activity, edtpass);
             if (type.equals("signup"))
             {
-                //CreateAlertDialog(phone);
-                ((SignInActivity)activity).DisplayFragmentCodeVerification(code.replace("+","00"),phone,country_code);
 
+              //  checkFound(code,phone);
                 //sendSMSCode(code,phone);
-                //((SignInActivity)activity).signIn(phone,country_code,code);
-
-            }else if (type.equals("edit_profile"))
-            {
-                ((ClientHomeActivity)activity).setPhoneData(code,country_code,phone);
+              //  ((SignInActivity)activity).signIn(name,pass);
+                signin(name,pass);
             }
+//            else if (type.equals("edit_profile"))
+//            {
+//                ((ClientHomeActivity)activity).setPhoneData(code,country_code,phone);
+//            }
         } else {
-            if (TextUtils.isEmpty(phone)) {
-                edt_phone.setError(getString(R.string.field_req));
-            } else if (!phone.matches(phone_regex)) {
-                edt_phone.setError(getString(R.string.inv_phone));
-            }else
+            if (TextUtils.isEmpty(name)) {
+                edtname.setError(getString(R.string.field_req));
+            } else
                 {
-                    edt_phone.setError(null);
+                    edtname.setError(null);
                 }
+            if (TextUtils.isEmpty(pass)) {
+                edtpass.setError(getString(R.string.field_req));
+            }
+            else   if (pass.length()<6) {
+                edtpass.setError(getString(R.string.password_short));
+            }
+            else
+            {
+                edtpass.setError(null);
+            }
         }
     }
 
+    private void signin(String name, String pass) {
+        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .login(name,pass)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+
+
+                        dialog.dismiss();
+
+                        if (response.isSuccessful())
+                        {
+                            ((SignInActivity)activity).signIn(response.body());
+
+                        }else if (response.code()==406)
+                        {
+                            Toast.makeText(activity, getString(R.string.user_bloked), Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            Log.e("error_code",response.code()+"_");
+
+
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error",t.getMessage());
+
+
+                        }catch (Exception e){}
+                    }
+                });
+    }
+
+    private void checkFound(String phone_code, final String phone) {
+        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .checkfound(phone_code.replace("+","00"),phone)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+
+
+                        dialog.dismiss();
+
+                        if (response.isSuccessful())
+                        {
+                            ((SignInActivity)activity).signIn(response.body());
+
+                        }else if (response.code()==406)
+                        {
+                            Toast.makeText(activity, getString(R.string.user_bloked), Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            Log.e("error_code",response.code()+"_");
+
+                            if (response.code()==401)
+                            {
+                               // sendSMSCode(phone_code,phone);
+                                ((SignInActivity)activity).signIn(phone,country_code,phone_code);
+                                //((SignInActivity)activity).DisplayFragmentCodeVerification(code.replace("+","00"),phone,country_code);
+                            }else
+                            {
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error",t.getMessage());
+
+
+                        }catch (Exception e){}
+                    }
+                });
+    }
     private void sendSMSCode(String phone_code, final String phone) {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
@@ -187,22 +311,11 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                        try {
-                            Log.e("body",response.body().string()+"__");
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Log.e("code",response.code()+"__");
-
                         dialog.dismiss();
 
                         if (response.isSuccessful())
                         {
-                            Log.e("body",response.body()+"__");
-                          //  CreateAlertDialog(phone);
                             ((SignInActivity)activity).DisplayFragmentCodeVerification(code.replace("+","00"),phone,country_code);
-
                         }else
                         {
                             try {
@@ -225,7 +338,7 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
                         try {
                             dialog.dismiss();
                             Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            Log.e("Errorssss",t.getMessage());
+                            Log.e("Error",t.getMessage());
 
 
                         }catch (Exception e){}
@@ -243,25 +356,36 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
 
         TelephonyManager telephonyManager = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
 
+        try {
+            if (picker.getCountryFromSIM() != null) {
+                updateUi(picker.getCountryFromSIM());
 
-        if (picker.getCountryFromSIM() != null) {
-            updateUi(picker.getCountryFromSIM());
-
-        } else if (telephonyManager != null && picker.getCountryByISO(telephonyManager.getNetworkCountryIso()) != null)
-        {
-            updateUi(picker.getCountryByISO(telephonyManager.getNetworkCountryIso()));
+            } else if (telephonyManager != null && picker.getCountryByISO(telephonyManager.getNetworkCountryIso()) != null)
+            {
+                updateUi(picker.getCountryByISO(telephonyManager.getNetworkCountryIso()));
 
 
-        } else if (picker.getCountryByLocale(Locale.getDefault()) != null) {
-            updateUi(picker.getCountryByLocale(Locale.getDefault()));
+            }
 
-        }else
+            else if (Locale.getDefault()!=null&&picker.getCountryByLocale(Locale.getDefault()) != null) {
+                updateUi(picker.getCountryByLocale(Locale.getDefault()));
+
+            }else
+            {
+                tv_code.setText("+966");
+                tv_country.setText("Saudi Arabia");
+                this.country_code = "sa";
+
+            }
+        }catch (Exception e)
         {
             tv_code.setText("+966");
             tv_country.setText("Saudi Arabia");
             this.country_code = "sa";
-
         }
+
+
+
 
 
     }
@@ -271,42 +395,15 @@ public class Fragment_Phone extends Fragment implements OnCountryPickerListener 
     }
 
     private void updateUi(Country country) {
-        country_code = country.getCode();
-
-        tv_country.setText(country.getName());
-        tv_code.setText(country.getDialCode());
-        code = country.getDialCode();
+//        country_code = country.getCode();
+//        tv_country.setText(country.getName());
+//        tv_code.setText(country.getDialCode());
+//        code = country.getDialCode();
 
 
 
 
     }
 
-    private void CreateAlertDialog(final String phone)
-    {
-        final AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setCancelable(false)
-                .create();
 
-        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_sign,null);
-        Button doneBtn = view.findViewById(R.id.doneBtn);
-        TextView tv_msg = view.findViewById(R.id.tv_msg);
-        tv_msg.setText(R.string.you_will_receive_4_digit);
-        doneBtn.setOnClickListener(
-                new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                ((SignInActivity)activity).DisplayFragmentCodeVerification(code.replace("+","00"),phone,country_code);
-
-            }
-        });
-
-        dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setView(view);
-        dialog.show();
-    }
 }

@@ -442,6 +442,7 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingStart="16dp"
+                android:visibility="gone"
                 tools:ignore="RtlCompat,RtlSymmetry">
                 <TextView
                     android:layout_width="wrap_content"
