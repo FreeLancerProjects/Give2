@@ -58,7 +58,6 @@ import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragme
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home.Fragment_Search;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home.Fragment_Settings;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home.Fragment_Shipment;
-import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home.Fragment_blog;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_orders.Fragment_Client_Orders;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_store_details.Fragment_Store_Details;
 import com.endpoint.giveme.activities_fragments.activity_sign_in.activity.SignInActivity;
@@ -132,7 +131,6 @@ public class ClientHomeActivity extends AppCompatActivity implements GoogleApiCl
     private Fragment_Client_Orders fragment_client_orders;
     private Fragment_Client_Notifications fragment_client_notifications;
     private Fragment_Client_Profile fragment_client_profile;
-    private Fragment_blog fragment_blog;
 
     private Fragment_Store_Details fragment_store_details;
     private Fragment_Shipment fragment_shipment;
@@ -773,9 +771,7 @@ fragment_client_orders.getOrders();                             }
         if (fragment_client_notifications != null && fragment_client_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_notifications).commit();
         }
-        if (fragment_blog != null && fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_blog).commit();
-        }
+
         if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
         }
@@ -804,9 +800,7 @@ fragment_client_orders.getOrders();                             }
         if (fragment_client_notifications != null && fragment_client_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_notifications).commit();
         }
-        if (fragment_blog != null && fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_blog).commit();
-        }
+
         if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
         }
@@ -842,9 +836,7 @@ fragment_client_orders.getOrders();                             }
         if (fragment_client_notifications != null && fragment_client_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_notifications).commit();
         }
-        if (fragment_blog != null && fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_blog).commit();
-        }
+
         if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
         }
@@ -880,9 +872,7 @@ fragment_client_orders.getOrders();                             }
         if (fragment_client_orders != null && fragment_client_orders.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_orders).commit();
         }
-        if (fragment_blog != null && fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_blog).commit();
-        }
+
         if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
         }
@@ -903,37 +893,6 @@ fragment_client_orders.getOrders();                             }
 
     }
 
-    public void DisplayFragmentBlog() {
-        if (fragment_home != null && fragment_home.isAdded()) {
-            fragment_home.updateBottomNavigationPosition(4);
-        }
-        if (fragment_client_store != null && fragment_client_store.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_client_store).commit();
-        }
-        if (fragment_shipment != null && fragment_shipment.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_shipment).commit();
-        }
-        if (fragment_client_orders != null && fragment_client_orders.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_client_orders).commit();
-        }
-        if (fragment_client_notifications != null && fragment_client_notifications.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_client_notifications).commit();
-        }
-        if (fragment_client_profile != null && fragment_client_profile.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_client_profile).commit();
-        }
-        if (fragment_blog == null) {
-            fragment_blog = Fragment_blog.newInstance();
-        }
-
-        if (fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_blog).commit();
-
-        } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_blog, "fragment_blog").addToBackStack("fragment_blog").commit();
-        }
-
-    }
 
     public void DisplayFragmentProfile() {
         if (fragment_home != null && fragment_home.isAdded()) {
@@ -951,9 +910,7 @@ fragment_client_orders.getOrders();                             }
         if (fragment_client_notifications != null && fragment_client_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_client_notifications).commit();
         }
-        if (fragment_blog != null && fragment_blog.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_blog).commit();
-        }
+
         if (fragment_client_profile == null) {
             fragment_client_profile = Fragment_Client_Profile.newInstance();
         }

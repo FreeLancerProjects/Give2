@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.endpoint.giveme.R;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.activity.ClientHomeActivity;
 import com.endpoint.giveme.activities_fragments.activity_sign_in.activity.SignInActivity;
-import com.endpoint.giveme.activities_fragments.intro_slider.MainScreen;
 import com.endpoint.giveme.language.Language_Helper;
 import com.endpoint.giveme.models.UserModel;
 import com.endpoint.giveme.preferences.Preferences;
@@ -38,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Thread myThread = new Thread()
+       /* Thread myThread = new Thread()
         {
             @Override
             public void run() {
@@ -53,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
-        myThread.start();
+        myThread.start();*/
 
 
 
