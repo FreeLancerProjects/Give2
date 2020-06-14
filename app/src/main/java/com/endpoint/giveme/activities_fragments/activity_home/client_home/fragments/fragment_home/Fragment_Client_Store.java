@@ -198,7 +198,7 @@ public class Fragment_Client_Store extends Fragment {
 //
 //        }
 //    });
-        getCatogries();
+       // getCatogries();
     }
 
     public void getCatogries() {

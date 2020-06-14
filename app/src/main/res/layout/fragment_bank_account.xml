@@ -54,21 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="@string/stcPay"
-                android:textColor="@color/colorPrimary"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:padding="5dp"
-
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:src="@drawable/stc"/>
 
             <FrameLayout
                 android:layout_width="match_parent"

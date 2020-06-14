@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activities_fragments.activity_splash.SplashActivity"
     android:id="@+id/fl"
+    android:background="@drawable/back_intro"
     >
     <ImageView
         android:id="@+id/imgLogo"
@@ -27,6 +28,7 @@
         android:src="@drawable/ic_splash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
 
         />
 

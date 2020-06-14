@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "1026037382625",
-    "firebase_url": "https://fast-one-22127.firebaseio.com",
-    "project_id": "fast-one-22127",
-    "storage_bucket": "fast-one-22127.appspot.com"
+    "project_number": "926659682565",
+    "firebase_url": "https://endpoint-9acfb.firebaseio.com",
+    "project_id": "endpoint-9acfb",
+    "storage_bucket": "endpoint-9acfb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1026037382625:android:6180b30aea15d0d7a4e6a0",
+        "mobilesdk_app_id": "1:926659682565:android:68db911d673f038a72976c",
         "android_client_info": {
-          "package_name": "com.endpoint.fastone"
+          "package_name": "com.endpoint.giveme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1026037382625-mq99t3c4ekcm1qefap8t6kps8b4pbg53.apps.googleusercontent.com",
+          "client_id": "926659682565-g79tapfe3g2hqp9juh0c7gjk7t62r4m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.endpoint.giveme",
+            "certificate_hash": "554eebb2d2756bf34aa3ed972b45440efb7eae32"
+          }
+        },
+        {
+          "client_id": "926659682565-k4dqp4me4qfvk3va9g58cb97vhhvfb83.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBeCs2gEgCMDd-ZBJ9eSTpu2FEfmaWniFE"
+          "current_key": "AIzaSyDQG0NbUo9UO_eXBsD03ZudUgj73fE75lE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1026037382625-mq99t3c4ekcm1qefap8t6kps8b4pbg53.apps.googleusercontent.com",
+              "client_id": "926659682565-k4dqp4me4qfvk3va9g58cb97vhhvfb83.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
