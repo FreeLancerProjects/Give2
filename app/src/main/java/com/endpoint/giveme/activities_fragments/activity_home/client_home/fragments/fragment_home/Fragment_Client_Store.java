@@ -261,9 +261,9 @@ public class Fragment_Client_Store extends Fragment {
                     @Override
                     public void onResponse(Call<SliderModel> call, Response<SliderModel> response) {
                         progBarSlider.setVisibility(View.GONE);
-
                         if (response.isSuccessful()&&response.body()!=null)
                         {
+
                             updateSliderData(response.body());
                         }else
                         {
@@ -325,7 +325,7 @@ public class Fragment_Client_Store extends Fragment {
 
         }else
 
-            pager.setVisibility(View.GONE);
+          ///  pager.setVisibility(View.GONE);
         {
             pager.setVisibility(View.GONE);
 
