@@ -57,8 +57,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
         preferences = Preferences.getInstance();
-        logo = findViewById(R.id.imgLogo);
-        ic_splash = findViewById(R.id.imgSplash);
+        logo = findViewById(R.id.img_cov);
+       // ic_splash = findViewById(R.id.imgSplash);
 
         Animation animation = AnimationUtils.loadAnimation(this,R.anim.fade);
         logo.startAnimation(animation);
@@ -98,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-        Animation animation2 = AnimationUtils.loadAnimation(this,R.anim.translate);
-        ic_splash.startAnimation(animation2);
+//        Animation animation2 = AnimationUtils.loadAnimation(this,R.anim.translate);
+//        ic_splash.startAnimation(animation2);
     }
 }
