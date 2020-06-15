@@ -666,7 +666,7 @@ public class ChatActivity extends AppCompatActivity {
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && messageModel.getBill_step().equals("not_attach")) {
                 ll_bill.setVisibility(View.GONE);
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.VISIBLE);
+                ll_bill.setVisibility(View.GONE);
 
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !messageModel.getBill_step().equals("not_attach")) {
                 ll_bill.setVisibility(View.GONE);
@@ -674,7 +674,7 @@ public class ChatActivity extends AppCompatActivity {
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !messageModel.getBill_step().equals("not_attach")) {
                 tv_title.setText(getResources().getString(R.string.pay));
 
-                ll_bill.setVisibility(View.VISIBLE);
+                ll_bill.setVisibility(View.GONE);
 
             }
         }
@@ -744,13 +744,13 @@ public class ChatActivity extends AppCompatActivity {
         } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && chatUserModel.getBill_step().equals("not_attach")) {
             ll_bill.setVisibility(View.GONE);
         } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.VISIBLE);
+            ll_bill.setVisibility(View.GONE);
 
         } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !chatUserModel.getBill_step().equals("not_attach")) {
             ll_bill.setVisibility(View.GONE);
 
         } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.VISIBLE);
+            ll_bill.setVisibility(View.GONE);
             tv_title.setText(getResources().getString(R.string.pay));
 
         }

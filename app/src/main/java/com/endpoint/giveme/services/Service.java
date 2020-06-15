@@ -90,7 +90,7 @@ public interface Service {
 
 
     @FormUrlEncoded
-    @POST("/Api/signup")
+    @POST("/api/signup")
     Call<UserModel> signUpWithoutImage(@Field("user_email") String user_email,
                                        @Field("user_phone") String user_phone,
                                        @Field("user_phone_code") String user_phone_code,
@@ -105,7 +105,7 @@ public interface Service {
 
 
     @Multipart
-    @POST("/Api/signup")
+    @POST("/api/signup")
     Call<UserModel> signUpWithImage(@Part("user_email") RequestBody user_email,
                                     @Part("user_phone") RequestBody user_phone,
                                     @Part("user_phone_code") RequestBody user_phone_code,
@@ -120,7 +120,7 @@ public interface Service {
 
 
     @Multipart
-    @POST("/Api/driverSignup")
+    @POST("/api/driverSignup")
     Call<UserModel> signUpDelegateWithoutImage(@Part("user_email") RequestBody user_email,
                                                @Part("user_phone") RequestBody user_phone,
                                                @Part("user_phone_code") RequestBody user_phone_code,
@@ -139,7 +139,7 @@ public interface Service {
     );
 
     @Multipart
-    @POST("/Api/driverSignup")
+    @POST("/api/driverSignup")
     Call<UserModel> signUpDelegateWithImage(@Part("user_email") RequestBody user_email,
                                             @Part("user_phone") RequestBody user_phone,
                                             @Part("user_phone_code") RequestBody user_phone_code,
@@ -516,7 +516,7 @@ public interface Service {
                                @Field("user_phone") String user_phone
     );
     @FormUrlEncoded
-    @POST("/Api/newLogin")
+    @POST("/api/newLogin")
     Call<UserModel> login(@Field("user_name") String user_name,
                           @Field("user_pass") String user_pass
     );
