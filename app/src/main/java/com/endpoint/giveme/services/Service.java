@@ -275,7 +275,9 @@ public interface Service {
                                   @Part("user_age") RequestBody user_age,
                                   @Part("user_address") RequestBody user_address,
                                   @Part("user_phone_code") RequestBody user_phone_code,
-                                  @Part("user_phone") RequestBody user_phone
+                                  @Part("user_phone") RequestBody user_phone,
+                                  @Part("user_pass") RequestBody user_pass
+
     );
 
     @GET("/api/placeOrders")

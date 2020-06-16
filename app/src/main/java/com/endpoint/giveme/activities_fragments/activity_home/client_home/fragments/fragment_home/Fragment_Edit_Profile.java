@@ -66,7 +66,7 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
     private final static  String TAG = "Data";
     private FloatingActionButton fab;
     private ClientHomeActivity activity;
-    private EditText edt_name,edt_email,edt_address;
+    private EditText edt_name,edt_email,edt_address,edtpass;
     private TextView tv_phone,tv_birth_date;
     private ImageView arrow;
     private CircleImageView image;
@@ -121,6 +121,7 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
         tv_phone  = view.findViewById(R.id.tv_phone);
         tv_birth_date  = view.findViewById(R.id.tv_birth_date);
         edt_address  = view.findViewById(R.id.edt_address);
+        edtpass=view.findViewById(R.id.edtPassword);
 
 
 
@@ -280,10 +281,12 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
     {
         String m_name = edt_name.getText().toString().trim();
         String m_email = edt_email.getText().toString().trim();
+        String pass=edtpass.getText().toString().trim();
 
         if (!TextUtils.isEmpty(m_name)&&
                 !TextUtils.isEmpty(m_email)&&
                 Patterns.EMAIL_ADDRESS.matcher(m_email).matches()
+                &&!TextUtils.isEmpty(pass)&&pass.length()>=6
                 )
         {
             Common.CloseKeyBoard(activity,edt_name);
@@ -292,7 +295,7 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
 
             if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT))
             {
-                UploadUserDataToUpdate(m_name,m_email,address);
+                UploadUserDataToUpdate(m_name,m_email,address,pass);
 
             }else
                 {
@@ -301,7 +304,7 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
                     if (!TextUtils.isEmpty(m_name))
                     {
                         edt_address.setError(null);
-                        UploadUserDataToUpdate(m_name,m_email,address);
+                        UploadUserDataToUpdate(m_name,m_email,address, pass);
 
                     }else
                         {
@@ -332,6 +335,16 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
             {
                 edt_email.setError(null);
 
+            }
+            if (TextUtils.isEmpty(pass)) {
+                edtpass.setError(getString(R.string.field_req));
+            }
+            else   if (pass.length()<6) {
+                edtpass.setError(getString(R.string.password_short));
+            }
+            else
+            {
+                edtpass.setError(null);
             }
 
 
@@ -466,9 +479,10 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
                 });
     }
 
-    private void UploadUserDataToUpdate(String m_name, String m_email, String address) {
+    private void UploadUserDataToUpdate(String m_name, String m_email, String address, String pass) {
 
         Log.e("date",date_of_birth+"_");
+
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.show();
         dialog.setCancelable(false);
@@ -481,10 +495,11 @@ public class Fragment_Edit_Profile extends Fragment implements DatePickerDialog.
         RequestBody user_address_part = Common.getRequestBodyText(address);
         RequestBody user_phone_code_part = Common.getRequestBodyText(phone_code.replace("+","00"));
         RequestBody user_phone_part = Common.getRequestBodyText(phone);
+        RequestBody pass_part = Common.getRequestBodyText(phone);
 
 
         Api.getService(Tags.base_url)
-                .updateProfile(user_id_part,user_email_part,user_name_part,user_country_part,user_gender_part,user_age_part,user_address_part,user_phone_code_part,user_phone_part)
+                .updateProfile(user_id_part,user_email_part,user_name_part,user_country_part,user_gender_part,user_age_part,user_address_part,user_phone_code_part,user_phone_part,pass_part)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
