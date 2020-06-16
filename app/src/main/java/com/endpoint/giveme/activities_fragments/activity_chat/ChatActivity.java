@@ -415,7 +415,14 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+        if(userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)){
+            ll_bill.setVisibility(View.VISIBLE);
 
+        }
+        else {
+            ll_bill.setVisibility(View.GONE);
+
+        }
 
     }
 
@@ -659,6 +666,14 @@ public class ChatActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ListenToNewMessage(MessageModel messageModel) {
+        if(userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)){
+            ll_bill.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            ll_bill.setVisibility(View.GONE);
+
+        }
         if (messageModel.getBill_step() != null) {
             if (messageModel.getBill_step().equals("bill_paid")) {
                 ll_bill.setVisibility(View.GONE);
@@ -666,10 +681,10 @@ public class ChatActivity extends AppCompatActivity {
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && messageModel.getBill_step().equals("not_attach")) {
                 ll_bill.setVisibility(View.GONE);
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.GONE);
+                ll_bill.setVisibility(View.VISIBLE);
 
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.GONE);
+                ll_bill.setVisibility(View.VISIBLE);
 
             } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !messageModel.getBill_step().equals("not_attach")) {
                 tv_title.setText(getResources().getString(R.string.pay));

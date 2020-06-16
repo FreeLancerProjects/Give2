@@ -316,6 +316,7 @@ cons_pay.setOnClickListener(new View.OnClickListener() {
                 cons_register_delegate.setVisibility(View.GONE);
             } else {
                 cons_register_delegate.setVisibility(View.GONE);
+                cons_pay.setVisibility(View.GONE);
 
 //                if (userModel.getData().getNum_orders() > 0) {
 //                    tv_certified.setText(getString(R.string.certified_account));

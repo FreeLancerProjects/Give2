@@ -1,18 +1,15 @@
 package com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,29 +19,20 @@ import androidx.fragment.app.Fragment;
 import com.endpoint.giveme.R;
 import com.endpoint.giveme.activities_fragments.activity_home.client_home.activity.ClientHomeActivity;
 import com.endpoint.giveme.models.UserModel;
-import com.endpoint.giveme.remote.Api;
-import com.endpoint.giveme.share.Common;
 import com.endpoint.giveme.singletone.UserSingleTone;
 import com.endpoint.giveme.tags.Tags;
-import com.zcw.togglebutton.ToggleButton;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import io.paperdb.Paper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Fragment_Settings extends Fragment {
 
     private ClientHomeActivity activity;
-    private ConstraintLayout cons_back,cons_alert,cons_complains,cons_edit_profile,cons_language,cons_terms,cons_privacy,cons_rate,cons_about,cons_banks;
-    private ImageView arrow_back,arrow1,arrow2,arrow3,arrow4,arrow5,arrow6,arrow7;
+    private ConstraintLayout cons_back,cons_complains,cons_edit_profile,cons_language,cons_terms,cons_privacy,cons_rate,cons_about,cons_banks;
+    private ImageView arrow_back,arrow1,arrow2,arrow3,arrow4,arrow5,arrow6,arrow7,arrow8;
     private String current_language;
-    private String [] language_array;
-    private ToggleButton toggle_btn;
-    private View v_alert;
+    private String[] language_array;
     private UserSingleTone userSingleTone;
     private UserModel userModel;
 
@@ -66,7 +54,7 @@ public class Fragment_Settings extends Fragment {
         userModel = userSingleTone.getUserModel();
         activity = (ClientHomeActivity) getActivity();
         Paper.init(activity);
-        current_language = Paper.book().read("lang",Locale.getDefault().getLanguage());
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
         arrow_back = view.findViewById(R.id.arrow_back);
         arrow1 = view.findViewById(R.id.arrow1);
@@ -76,6 +64,7 @@ public class Fragment_Settings extends Fragment {
         arrow5 = view.findViewById(R.id.arrow5);
         arrow6 = view.findViewById(R.id.arrow6);
         arrow7 = view.findViewById(R.id.arrow7);
+        arrow8 = view.findViewById(R.id.arrow8);
 
         language_array = new String[]{"English","العربية"};
 
@@ -90,23 +79,24 @@ public class Fragment_Settings extends Fragment {
             arrow5.setImageResource(R.drawable.ic_left_arrow);
             arrow6.setImageResource(R.drawable.ic_left_arrow);
             arrow7.setImageResource(R.drawable.ic_left_arrow);
+            arrow8.setImageResource(R.drawable.ic_left_arrow);
 
         }else
-            {
-                arrow_back.setImageResource(R.drawable.ic_left_arrow);
-                arrow1.setImageResource(R.drawable.ic_right_arrow);
-                arrow2.setImageResource(R.drawable.ic_right_arrow);
-                arrow3.setImageResource(R.drawable.ic_right_arrow);
-                arrow4.setImageResource(R.drawable.ic_right_arrow);
-                arrow5.setImageResource(R.drawable.ic_right_arrow);
-                arrow6.setImageResource(R.drawable.ic_right_arrow);
-                arrow7.setImageResource(R.drawable.ic_right_arrow);
+        {
+            arrow_back.setImageResource(R.drawable.ic_left_arrow);
+            arrow1.setImageResource(R.drawable.ic_right_arrow);
+            arrow2.setImageResource(R.drawable.ic_right_arrow);
+            arrow3.setImageResource(R.drawable.ic_right_arrow);
+            arrow4.setImageResource(R.drawable.ic_right_arrow);
+            arrow5.setImageResource(R.drawable.ic_right_arrow);
+            arrow6.setImageResource(R.drawable.ic_right_arrow);
+            arrow7.setImageResource(R.drawable.ic_right_arrow);
+            arrow8.setImageResource(R.drawable.ic_right_arrow);
 
 
-            }
+        }
 
         cons_back = view.findViewById(R.id.cons_back);
-        cons_alert = view.findViewById(R.id.cons_alert);
         cons_complains = view.findViewById(R.id.cons_complains);
         cons_edit_profile = view.findViewById(R.id.cons_edit_profile);
         cons_language = view.findViewById(R.id.cons_language);
@@ -115,10 +105,9 @@ public class Fragment_Settings extends Fragment {
         cons_rate = view.findViewById(R.id.cons_rate);
         cons_about = view.findViewById(R.id.cons_about);
         cons_back = view.findViewById(R.id.cons_back);
-      //  cons_banks = view.findViewById(R.id.cons_banks);
+        cons_banks = view.findViewById(R.id.cons_banks);
 
-        toggle_btn = view.findViewById(R.id.toggle_btn);
-        v_alert = view.findViewById(R.id.v_alert);
+
 
         cons_rate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +137,7 @@ public class Fragment_Settings extends Fragment {
         cons_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.NavigateToAboutActivity(Tags.APPABOUT);
+                activity.NavigateToTermsActivity(Tags.APPABOUT);
             }
         });
 
@@ -179,30 +168,17 @@ public class Fragment_Settings extends Fragment {
             }
         });
 
-        toggle_btn.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
-            @Override
-            public void onToggle(boolean on) {
-                if (on)
-                {
-                    updateState("on");
-                }else
-                    {
-                        updateState("off");
 
-                    }
-            }
-        });
-
-     /*   cons_banks.setOnClickListener(new View.OnClickListener() {
+        cons_banks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.DisplayFragmentBankAccount();
             }
-        });*/
+        });
 
 
 
-        if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE))
+      /*  if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE))
         {
             cons_alert.setVisibility(View.VISIBLE);
             v_alert.setVisibility(View.VISIBLE);
@@ -218,11 +194,11 @@ public class Fragment_Settings extends Fragment {
             {
                 cons_alert.setVisibility(View.GONE);
                 v_alert.setVisibility(View.GONE);
-            }
+            }*/
 
     }
 
-    private void updateState(final String state)
+  /*  private void updateState(final String state)
     {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.show();
@@ -277,7 +253,7 @@ public class Fragment_Settings extends Fragment {
                     }
                 });
 
-    }
+    }*/
 
     private void UpdateUserData(UserModel userModel) {
         this.userModel = userModel;
@@ -306,10 +282,10 @@ public class Fragment_Settings extends Fragment {
             numberPicker.setValue(1);
 
         }else
-            {
-                numberPicker.setValue(0);
+        {
+            numberPicker.setValue(0);
 
-            }
+        }
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -319,10 +295,10 @@ public class Fragment_Settings extends Fragment {
                 {
                     activity.RefreshActivity("en");
                 }else
-                    {
-                        activity.RefreshActivity("ar");
+                {
+                    activity.RefreshActivity("ar");
 
-                    }
+                }
 
             }
         });
