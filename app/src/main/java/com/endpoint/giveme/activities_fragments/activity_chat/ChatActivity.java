@@ -212,6 +212,14 @@ public class ChatActivity extends AppCompatActivity {
 
         cons_typing = findViewById(R.id.cons_typing);
         image_chat_user = findViewById(R.id.image_chat_user);
+        if(userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)){
+            ll_bill.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            ll_bill.setVisibility(View.GONE);
+
+        }
 
 
         recView = findViewById(R.id.recView);
@@ -415,14 +423,6 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-        if(userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)){
-            ll_bill.setVisibility(View.VISIBLE);
-
-        }
-        else {
-            ll_bill.setVisibility(View.GONE);
-
-        }
 
     }
 
@@ -674,25 +674,25 @@ public class ChatActivity extends AppCompatActivity {
             ll_bill.setVisibility(View.GONE);
 
         }
-        if (messageModel.getBill_step() != null) {
-            if (messageModel.getBill_step().equals("bill_paid")) {
-                ll_bill.setVisibility(View.GONE);
-
-            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.GONE);
-            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.VISIBLE);
-
-            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !messageModel.getBill_step().equals("not_attach")) {
-                ll_bill.setVisibility(View.VISIBLE);
-
-            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !messageModel.getBill_step().equals("not_attach")) {
-                tv_title.setText(getResources().getString(R.string.pay));
-
-                ll_bill.setVisibility(View.GONE);
-
-            }
-        }
+//        if (messageModel.getBill_step() != null) {
+//            if (messageModel.getBill_step().equals("bill_paid")) {
+//                ll_bill.setVisibility(View.GONE);
+//
+//            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && messageModel.getBill_step().equals("not_attach")) {
+//                ll_bill.setVisibility(View.GONE);
+//            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && messageModel.getBill_step().equals("not_attach")) {
+//                ll_bill.setVisibility(View.VISIBLE);
+//
+//            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !messageModel.getBill_step().equals("not_attach")) {
+//                ll_bill.setVisibility(View.VISIBLE);
+//
+//            } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !messageModel.getBill_step().equals("not_attach")) {
+//                //tv_title.setText(getResources().getString(R.string.pay));
+//
+//                ll_bill.setVisibility(View.GONE);
+//
+//            }
+//        }
         if (messageModel.getTotal_cost() != null) {
             chatUserModel.setTotla_cost(messageModel.getTotal_cost());
         }
@@ -753,22 +753,30 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void UpdateUI(ChatUserModel chatUserModel) {
-        if (chatUserModel.getBill_step().equals("bill_paid")) {
-            ll_bill.setVisibility(View.GONE);
-
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.GONE);
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.GONE);
-
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.GONE);
-
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !chatUserModel.getBill_step().equals("not_attach")) {
-            ll_bill.setVisibility(View.GONE);
-            tv_title.setText(getResources().getString(R.string.pay));
+        if(userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)){
+            ll_bill.setVisibility(View.VISIBLE);
 
         }
+        else {
+            ll_bill.setVisibility(View.GONE);
+
+        }
+//        if (chatUserModel.getBill_step().equals("bill_paid")) {
+//            ll_bill.setVisibility(View.GONE);
+//
+//        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && chatUserModel.getBill_step().equals("not_attach")) {
+//            ll_bill.setVisibility(View.GONE);
+//        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && chatUserModel.getBill_step().equals("not_attach")) {
+//            ll_bill.setVisibility(View.GONE);
+//
+//        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE) && !chatUserModel.getBill_step().equals("not_attach")) {
+//            ll_bill.setVisibility(View.GONE);
+//
+//        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && !chatUserModel.getBill_step().equals("not_attach")) {
+//            ll_bill.setVisibility(View.GONE);
+//          //  tv_title.setText(getResources().getString(R.string.pay));
+//
+//        }
         preferences.saveChatUserData(this, chatUserModel);
         tv_name.setText(chatUserModel.getName());
         tv_order_num.setText(getString(R.string.order_number) + "#" + chatUserModel.getOrder_id());
@@ -873,7 +881,7 @@ public class ChatActivity extends AppCompatActivity {
                         Log.e("datttaa", response.body() + "_");
                         progBar.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
-                            ll_bill.setVisibility(View.GONE);
+                          //  ll_bill.setVisibility(View.GONE);
                             // chatUserModel.setBill_step("bill_attach");
                             if (adapter == null) {
                                 messageModelList.add(response.body());
