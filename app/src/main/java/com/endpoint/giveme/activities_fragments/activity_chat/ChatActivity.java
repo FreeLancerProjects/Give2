@@ -1252,7 +1252,7 @@ public class ChatActivity extends AppCompatActivity {
                     network_per_totla = (total * network_per) / 100;
                     network_per_totla = 0;
                     //   total+=network_per_totla;
-                    String msg = "تكلفة المشتريات: " + cost + " " + currency.getSymbol() + "\n" + "تكلفة التوصيل شامل ضريبة القيمه المضافه: " + chatUserModel.getOffer_cost() + currency.getSymbol() + "\n" + "المجموع الكلي : " + total + " " + currency.getSymbol();
+                    String msg = "تكلفة المشتريات: " + cost + " " + currency.getSymbol() + "\n" + "تكلفة التوصيل: " + chatUserModel.getOffer_cost() + currency.getSymbol() + "\n" + "المجموع الكلي : " + total + " " + currency.getSymbol();
                     bill_amount = total + "";
                     sendلاbillMessageWithImage(msg);
 
