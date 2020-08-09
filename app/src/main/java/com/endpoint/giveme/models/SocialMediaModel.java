@@ -8,6 +8,7 @@ public class SocialMediaModel implements Serializable {
     private String company_twitter;
     private String company_instagram;
     private String company_telegram;
+    private String company_telegram_drive;
     private String company_snapchat;
     private String company_whatsapp;
     private String company_emails;
@@ -43,5 +44,9 @@ public class SocialMediaModel implements Serializable {
 
     public String getCompany_emails() {
         return company_emails;
+    }
+
+    public String getCompany_telegram_drive() {
+        return company_telegram_drive;
     }
 }

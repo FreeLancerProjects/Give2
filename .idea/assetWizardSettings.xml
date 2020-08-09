@@ -64,6 +64,7 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ff8b5c" />
                                       <entry key="foregroundImage" value="C:\android\AndroidProjects\Give Me\app\src\main\res\drawable\logo.png" />
+                                      <entry key="outputName" value="ic_notification" />
                                     </map>
                                   </option>
                                 </PersistentState>
