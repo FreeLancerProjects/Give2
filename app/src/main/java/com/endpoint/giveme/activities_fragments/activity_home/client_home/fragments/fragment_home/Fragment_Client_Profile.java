@@ -132,7 +132,9 @@ public class Fragment_Client_Profile extends Fragment {
 
             }
         });
-
+        if (userModel != null && userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)) {
+            cons_add_coupon.setVisibility(View.VISIBLE);
+        }
 
         cons_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +255,7 @@ public class Fragment_Client_Profile extends Fragment {
                     } catch (Exception e) {
                         // show error message
                     }
-                }else {
+                } else {
                     try {
 
                         Intent telegramIntent = new Intent(Intent.ACTION_VIEW);
