@@ -285,8 +285,9 @@ public interface Service {
 
     @GET("/api/clientOrders")
     Call<OrderDataModel> getClientOrders(@Query("user_id") String user_id, @Query("order_type") String order_type, @Query("page") int page);
+
     @GET("/api/clientOrders")
-    Call<OrderModel> getClientOrders(@Query("order_id")String order_id);
+    Call<OrderModel> getClientOrders(@Query("order_id") String order_id);
 
 
     @GET("/api/driverOrders")
@@ -443,6 +444,13 @@ public interface Service {
     );
 
     @FormUrlEncoded
+    @POST("/api/chargingCard")
+    Call<UserModel> getchargeValue(@Field("user_id") String user_id,
+                                   @Field("coupon_code") String coupon_code
+
+    );
+
+    @FormUrlEncoded
     @POST("/api/deleteNote")
     Call<ResponseBody> clientRefuseDelegateOffer(@Field("id_notification") String id_notification);
 
@@ -499,12 +507,14 @@ public interface Service {
             @Field("user_type") String user_type,
             @Field("amount") double amount
     );
+
     @FormUrlEncoded
     @POST("/api/deleteOrder")
     Call<ResponseBody> DelteOrder(
             @Field("user_id") String user_id,
             @Field("order_id") String order_id
     );
+
     @FormUrlEncoded
     @POST("http://sub.quick.com.sa/api/online-payment-bill")
     Call<PayPalLinkModel> getbillpay(
@@ -512,11 +522,13 @@ public interface Service {
             @Field("order_id") String order_id,
             @Field("bill_amount") String bill_amount
     );
+
     @FormUrlEncoded
     @POST("/Api/logMe")
     Call<UserModel> checkfound(@Field("user_phone_code") String user_phone_code,
                                @Field("user_phone") String user_phone
     );
+
     @FormUrlEncoded
     @POST("/api/newLogin")
     Call<UserModel> login(@Field("user_name") String user_name,

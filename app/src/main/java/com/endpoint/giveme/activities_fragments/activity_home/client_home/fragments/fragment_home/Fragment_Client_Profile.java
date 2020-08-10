@@ -45,7 +45,7 @@ import retrofit2.Response;
 
 public class Fragment_Client_Profile extends Fragment {
 
-    private ImageView image_logout, image, arrow, arrow2, arrow3, arrow13, image_instagram, image_facebook, image_twitter, img_certified;
+    private ImageView image_logout, image, arrow, arrow2, arrow3, arrow13, image_instagram, image_facebook, image_twitter, img_certified,arrow5;
     private TextView tv_name, tv_balance, tv_order_count, tv_feedback, tv_certified, tv_coupons;
     private SimpleRatingBar rateBar;
     private ConstraintLayout cons_setting, cons_balance, cons_register_delegate, cons_comment, cons_add_coupon, cons_banks, cons_pay;
@@ -79,18 +79,21 @@ public class Fragment_Client_Profile extends Fragment {
         arrow = view.findViewById(R.id.arrow);
         arrow2 = view.findViewById(R.id.arrow2);
         arrow3 = view.findViewById(R.id.arrow3);
+        arrow5 = view.findViewById(R.id.arrow5);
         arrow13 = view.findViewById(R.id.arrow13);
 
         if (current_language.equals("ar")) {
             arrow.setImageResource(R.drawable.ic_left_arrow);
             arrow2.setImageResource(R.drawable.ic_left_arrow);
             arrow3.setImageResource(R.drawable.ic_left_arrow);
+            arrow5.setImageResource(R.drawable.ic_left_arrow);
             arrow13.setImageResource(R.drawable.ic_left_arrow);
 
         } else {
             arrow.setImageResource(R.drawable.ic_right_arrow);
             arrow2.setImageResource(R.drawable.ic_right_arrow);
             arrow3.setImageResource(R.drawable.ic_right_arrow);
+            arrow5.setImageResource(R.drawable.ic_left_arrow);
             arrow13.setImageResource(R.drawable.ic_left_arrow);
 
 

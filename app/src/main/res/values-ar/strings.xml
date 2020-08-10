@@ -338,5 +338,12 @@
     <string name="user_name">اسم المستخدم</string>
     <string name="password_short">كلمة المرور قصيره</string>
     <string name="client">عميل</string>
-
+    <string name="recharge">شحن الرصيد</string>
+    <string name="the_num_of_cha">عدد كروت الشحن</string>
+    <string name="addshippingcards">تاضف كارت الشحن</string>
+    <string name="entershippingcards">ادخل رقم كارت الشحن</string>
+    <string name="useshippingcards">استخدم كارت الشحن</string>
+    <string name="shipcard">تم اضافة الكارت</string>
+    <string name="shipcard_not_found">كارت الشحن غير موجود</string>
+    <string name="shipcard_used">تم استخدام كارت الشحن من قبل</string>
 </resources>

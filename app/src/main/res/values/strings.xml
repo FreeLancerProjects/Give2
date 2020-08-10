@@ -341,5 +341,13 @@ We inform you that the application commission (20%) is calculated on a single tr
     <string name="user_name">User Name</string>
     <string name="password_short">Password Short</string>
     <string name="client">Client</string>
+    <string name="recharge">Recharge</string>
+    <string name="the_num_of_cha">The number of charging cards</string>
+    <string name="addshippingcards">Add shipping cards</string>
+    <string name="entershippingcards">Enter shipping cards Num</string>
+    <string name="useshippingcards">Use shipping cards </string>
+    <string name="shipcard">Ship Card Added</string>
+    <string name="shipcard_not_found">Shipping Card Not Found</string>
+    <string name="shipcard_used">Shipping Card Used Before</string>
 
 </resources>
