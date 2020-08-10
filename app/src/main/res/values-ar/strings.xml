@@ -340,7 +340,7 @@
     <string name="client">عميل</string>
     <string name="recharge">شحن الرصيد</string>
     <string name="the_num_of_cha">عدد كروت الشحن</string>
-    <string name="addshippingcards">تاضف كارت الشحن</string>
+    <string name="addshippingcards">اضف كارت الشحن</string>
     <string name="entershippingcards">ادخل رقم كارت الشحن</string>
     <string name="useshippingcards">استخدم كارت الشحن</string>
     <string name="shipcard">تم اضافة الكارت</string>
