@@ -5,12 +5,11 @@ android {
     defaultConfig {
         applicationId "com.endpoint.giveme"
         minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 11
-        versionName "2.0"
+        targetSdkVersion 30
+        versionCode 13
+        versionName "2.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -19,7 +18,7 @@ android {
         }
     }
 
-    compileSdkVersion = 28
+    compileSdkVersion = 30
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
