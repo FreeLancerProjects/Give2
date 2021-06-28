@@ -211,7 +211,9 @@ public interface Service {
                                      @Field("place_long") double place_long,
                                      @Field("order_time_arrival") long order_time_arrival,
                                      @Field("coupon_id") String coupon_id,
-                                     @Field("place_name") String place_name
+                                     @Field("place_name") String place_name,
+                                     @Field("other_data") String other_data
+
 
     );
 
@@ -230,7 +232,9 @@ public interface Service {
                                               @Part("place_long") RequestBody place_long,
                                               @Part("order_time_arrival") RequestBody order_time_arrival,
                                               @Part("coupon_id") RequestBody RequestBody,
-                                              @Part MultipartBody.Part image
+                                              @Part MultipartBody.Part image,
+                                              @Part("other_data") RequestBody other_data
+
     );
 
     @FormUrlEncoded

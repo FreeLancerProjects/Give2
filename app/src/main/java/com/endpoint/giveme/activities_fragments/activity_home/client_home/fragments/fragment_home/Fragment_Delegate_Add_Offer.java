@@ -1,8 +1,11 @@
 package com.endpoint.giveme.activities_fragments.activity_home.client_home.fragments.fragment_home;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +31,10 @@ import com.endpoint.giveme.tags.Tags;
 import com.google.android.material.appbar.AppBarLayout;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
@@ -37,9 +44,9 @@ public class Fragment_Delegate_Add_Offer extends Fragment {
     private final static String TAG = "Data";
     private ImageView image_back,order_image,image_arrow;
     private FrameLayout fl_map;
-    private LinearLayout ll_back,ll_client_container,ll_address,ll_shipment;
+    private LinearLayout ll_back,ll_client_container,ll_address,ll_time,ll_shipment;
     private CircleImageView image;
-    private TextView tv_client_name,rest_name,tv_order_details,tv_order_address,tv_location_pickup,tv_location_dropoff;
+    private TextView tv_client_name,rest_name,tv_order_details,tv_order_address,tv_order_time,tv_location_pickup,tv_location_dropoff;
     private TextView tv_delivery_cost;
     private EditText edt_delivery_cost;
     private Button btn_accept,btn_refused;
@@ -99,6 +106,7 @@ public class Fragment_Delegate_Add_Offer extends Fragment {
         tv_client_name = view.findViewById(R.id.tv_client_name);
         tv_order_details = view.findViewById(R.id.tv_order_details);
         tv_order_address = view.findViewById(R.id.tv_order_address);
+        tv_order_time = view.findViewById(R.id.tv_order_time);
         tv_delivery_cost = view.findViewById(R.id.tv_delivery_cost);
         rest_name = view.findViewById(R.id.tv_rest_name);
 
@@ -107,6 +115,7 @@ public class Fragment_Delegate_Add_Offer extends Fragment {
         ll_client_container = view.findViewById(R.id.ll_client_container);
 
         ll_address = view.findViewById(R.id.ll_address);
+        ll_time = view.findViewById(R.id.ll_time);
 
         ll_shipment = view.findViewById(R.id.ll_shipment);
         tv_location_pickup = view.findViewById(R.id.tv_location_pickup);
@@ -172,13 +181,17 @@ public class Fragment_Delegate_Add_Offer extends Fragment {
     }
 
 
-
+    @SuppressLint("SetTextI18n")
     private void UpdateUI(OrderDataModel.OrderModel orderModel) {
         if (orderModel!=null)
         {
             Picasso.with(activity).load(Tags.IMAGE_URL+orderModel.getClient_user_image()).placeholder(R.drawable.logo).fit().into(image);
             tv_client_name.setText(orderModel.getClient_user_full_name());
             tv_order_details.setText(orderModel.getOrder_details());
+
+             tv_order_time.setText(orderModel.getOther_data()+"");
+            Log.e("eeeeee", orderModel.getOrder_time_arrival()+"________");
+
             rest_name.setText(orderModel.getPlace_name());
 
             if (orderModel.getOrder_image()==null||orderModel.getOrder_image().equals("0"))

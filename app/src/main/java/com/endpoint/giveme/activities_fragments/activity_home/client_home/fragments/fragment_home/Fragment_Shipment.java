@@ -297,7 +297,7 @@ public class Fragment_Shipment extends Fragment {
         final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendOrder(userModel.getData().getUser_id(),place_dropoff_address, place_dropoff_lat, place_dropoff_long, order_details, place_id, place_pickup_address, "2", place_pickup_lat, place_pickup_long, selected_time,coupon_id+"",place_name)
+                .sendOrder(userModel.getData().getUser_id(),place_dropoff_address, place_dropoff_lat, place_dropoff_long, order_details, place_id, place_pickup_address, "2", place_pickup_lat, place_pickup_long, selected_time,coupon_id+"",place_name,tv_delivery_time.getText().toString())
                 .enqueue(new Callback<OrderIdDataModel>() {
                     @Override
                     public void onResponse(Call<OrderIdDataModel> call, Response<OrderIdDataModel> response) {
@@ -350,6 +350,8 @@ public class Fragment_Shipment extends Fragment {
         RequestBody place_pickup_lat_part = Common.getRequestBodyText(String.valueOf(place_pickup_lat));
         RequestBody place_pickup_long_part = Common.getRequestBodyText(String.valueOf(place_pickup_long));
         RequestBody selected_time_part = Common.getRequestBodyText(String.valueOf(selected_time));
+        RequestBody other_time_part = Common.getRequestBodyText(tv_delivery_time.getText().toString());
+
         MultipartBody.Part image_part = Common.getMultiPart(activity,uri,"order_image");
         RequestBody copun_part = Common.getRequestBodyText(coupon_id+"");
 
@@ -359,7 +361,7 @@ public class Fragment_Shipment extends Fragment {
         final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendOrderWithImage(user_id_part,place_dropoff_address_part, place_dropoff_lat_part, place_dropoff_long_part, order_details_part, place_id_part, place_name_part,place_pickup_address_part, order_type_part, place_pickup_lat_part, place_pickup_long_part, selected_time_part,copun_part,image_part)
+                .sendOrderWithImage(user_id_part,place_dropoff_address_part, place_dropoff_lat_part, place_dropoff_long_part, order_details_part, place_id_part, place_name_part,place_pickup_address_part, order_type_part, place_pickup_lat_part, place_pickup_long_part, selected_time_part,copun_part,image_part,other_time_part)
                 .enqueue(new Callback<OrderIdDataModel>() {
                     @Override
                     public void onResponse(Call<OrderIdDataModel> call, Response<OrderIdDataModel> response) {

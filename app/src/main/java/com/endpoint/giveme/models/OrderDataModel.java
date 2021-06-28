@@ -52,7 +52,9 @@ public class OrderDataModel implements Serializable {
         private String order_time;
         private String place_name;
         private String bill_step;
-private String bill_amount;
+        private String other_data;
+
+        private String bill_amount;
 
         public String getBill_amount() {
             return bill_amount;
@@ -200,6 +202,14 @@ private String bill_amount;
 
         public String getOrder_time() {
             return order_time;
+        }
+
+        public String getOther_data() {
+            return other_data;
+        }
+
+        public void setOther_data(String other_data) {
+            this.other_data = other_data;
         }
     }
 

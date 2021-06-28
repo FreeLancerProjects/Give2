@@ -468,7 +468,7 @@ public class CategoryActivity extends AppCompatActivity {
         final ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendOrder(userModel.getData().getUser_id(),selectedLocation.getAddress()+" "+selectedLocation.getAddress(),selectedLocation.getLat(),selectedLocation.getLng(),order_details,singlecategory.getData().get(0).getPlace_id()+"",singlecategory.getData().get(0).getAddress(),"1",singlecategory.getData().get(0).getGoogle_lat(),singlecategory.getData().get(0).getGoogle_long(),selected_time,coupon_id+"",singlecategory.getData().get(0).getCategory_id())
+                .sendOrder(userModel.getData().getUser_id(),selectedLocation.getAddress()+" "+selectedLocation.getAddress(),selectedLocation.getLat(),selectedLocation.getLng(),order_details,singlecategory.getData().get(0).getPlace_id()+"",singlecategory.getData().get(0).getAddress(),"1",singlecategory.getData().get(0).getGoogle_lat(),singlecategory.getData().get(0).getGoogle_long(),selected_time,coupon_id+"",singlecategory.getData().get(0).getCategory_id(),tv_time.getText().toString())
                 .enqueue(new Callback<OrderIdDataModel>() {
                     @Override
                     public void onResponse(Call<OrderIdDataModel> call, Response<OrderIdDataModel> response) {
@@ -774,12 +774,14 @@ public class CategoryActivity extends AppCompatActivity {
         RequestBody place_lng_part = Common.getRequestBodyText(String.valueOf(selectedLocation.getLng()));
         RequestBody selected_time_part = Common.getRequestBodyText(String.valueOf(selected_time));
         MultipartBody.Part image_part = Common.getMultiPart(this,uri,"order_image");
+        RequestBody other_time_part = Common.getRequestBodyText(String.valueOf(tv_time.getText()));
+
         RequestBody copun_part = Common.getRequestBodyText(coupon_id+"");
 
         final ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendOrderWithImage(user_id_part,client_address_part,client_lat_part,client_lng_part,order_details_part,place_id_part,place_name_part,place_address_part,order_type_part,place_lat_part,place_lng_part,selected_time_part,copun_part,image_part)
+                .sendOrderWithImage(user_id_part,client_address_part,client_lat_part,client_lng_part,order_details_part,place_id_part,place_name_part,place_address_part,order_type_part,place_lat_part,place_lng_part,selected_time_part,copun_part,image_part,other_time_part)
                 .enqueue(new Callback<OrderIdDataModel>() {
                     @Override
                     public void onResponse(Call<OrderIdDataModel> call, Response<OrderIdDataModel> response) {
